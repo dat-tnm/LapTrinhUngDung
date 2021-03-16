@@ -1,0 +1,8 @@
+C:\C# project\LTUD_1\BLL\bin\Debug\BLL.dll
+C:\C# project\LTUD_1\BLL\bin\Debug\BLL.pdb
+C:\C# project\LTUD_1\BLL\bin\Debug\DAL.dll
+C:\C# project\LTUD_1\BLL\bin\Debug\DAL.pdb
+C:\C# project\LTUD_1\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+C:\C# project\LTUD_1\BLL\obj\Debug\BLL.csproj.CopyComplete
+C:\C# project\LTUD_1\BLL\obj\Debug\BLL.dll
+C:\C# project\LTUD_1\BLL\obj\Debug\BLL.pdb
