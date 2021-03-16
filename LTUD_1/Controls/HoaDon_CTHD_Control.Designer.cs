@@ -52,8 +52,8 @@
             this.txtDonGia = new System.Windows.Forms.TextBox();
             this.cbbHangHoa = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnCAddCTHD = new System.Windows.Forms.Button();
-            this.btnAddHD = new System.Windows.Forms.Button();
+            this.btnAddCTHD = new System.Windows.Forms.Button();
+            this.btnNewHD = new System.Windows.Forms.Button();
             this.btnSaveHD = new System.Windows.Forms.Button();
             this.btnUpdateHD = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
@@ -116,6 +116,7 @@
             this.btnAddNV.TabIndex = 8;
             this.btnAddNV.Text = "+";
             this.btnAddNV.UseVisualStyleBackColor = true;
+            this.btnAddNV.Click += new System.EventHandler(this.btnAddNV_Click);
             // 
             // btnAddKH
             // 
@@ -125,6 +126,7 @@
             this.btnAddKH.TabIndex = 9;
             this.btnAddKH.Text = "+";
             this.btnAddKH.UseVisualStyleBackColor = true;
+            this.btnAddKH.Click += new System.EventHandler(this.btnAddKH_Click);
             // 
             // datePick_HD
             // 
@@ -192,7 +194,7 @@
             this.groupB_CTHD.Controls.Add(this.txtDonGia);
             this.groupB_CTHD.Controls.Add(this.cbbHangHoa);
             this.groupB_CTHD.Controls.Add(this.label6);
-            this.groupB_CTHD.Controls.Add(this.btnCAddCTHD);
+            this.groupB_CTHD.Controls.Add(this.btnAddCTHD);
             this.groupB_CTHD.Location = new System.Drawing.Point(410, 3);
             this.groupB_CTHD.Name = "groupB_CTHD";
             this.groupB_CTHD.Size = new System.Drawing.Size(401, 400);
@@ -257,7 +259,7 @@
             this.dataGV_CTHD.Name = "dataGV_CTHD";
             this.dataGV_CTHD.Size = new System.Drawing.Size(373, 282);
             this.dataGV_CTHD.TabIndex = 13;
-            this.dataGV_CTHD.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGV_CTHD_CellContentClick);
+            this.dataGV_CTHD.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGV_CTHD_CellClick);
             // 
             // label5
             // 
@@ -282,6 +284,7 @@
             this.cbbHangHoa.Name = "cbbHangHoa";
             this.cbbHangHoa.Size = new System.Drawing.Size(126, 21);
             this.cbbHangHoa.TabIndex = 11;
+            this.cbbHangHoa.SelectedIndexChanged += new System.EventHandler(this.cbbHangHoa_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -292,23 +295,25 @@
             this.label6.TabIndex = 2;
             this.label6.Text = "Đơn giá";
             // 
-            // btnCAddCTHD
+            // btnAddCTHD
             // 
-            this.btnCAddCTHD.Location = new System.Drawing.Point(12, 83);
-            this.btnCAddCTHD.Name = "btnCAddCTHD";
-            this.btnCAddCTHD.Size = new System.Drawing.Size(62, 23);
-            this.btnCAddCTHD.TabIndex = 9;
-            this.btnCAddCTHD.Text = "Thêm";
-            this.btnCAddCTHD.UseVisualStyleBackColor = true;
+            this.btnAddCTHD.Location = new System.Drawing.Point(12, 83);
+            this.btnAddCTHD.Name = "btnAddCTHD";
+            this.btnAddCTHD.Size = new System.Drawing.Size(62, 23);
+            this.btnAddCTHD.TabIndex = 9;
+            this.btnAddCTHD.Text = "Thêm";
+            this.btnAddCTHD.UseVisualStyleBackColor = true;
+            this.btnAddCTHD.Click += new System.EventHandler(this.btnAddCTHD_Click);
             // 
-            // btnAddHD
+            // btnNewHD
             // 
-            this.btnAddHD.Location = new System.Drawing.Point(15, 409);
-            this.btnAddHD.Name = "btnAddHD";
-            this.btnAddHD.Size = new System.Drawing.Size(62, 23);
-            this.btnAddHD.TabIndex = 20;
-            this.btnAddHD.Text = "Tạo mới";
-            this.btnAddHD.UseVisualStyleBackColor = true;
+            this.btnNewHD.Location = new System.Drawing.Point(15, 409);
+            this.btnNewHD.Name = "btnNewHD";
+            this.btnNewHD.Size = new System.Drawing.Size(62, 23);
+            this.btnNewHD.TabIndex = 20;
+            this.btnNewHD.Text = "Tạo mới";
+            this.btnNewHD.UseVisualStyleBackColor = true;
+            this.btnNewHD.Click += new System.EventHandler(this.btnNewHD_Click);
             // 
             // btnSaveHD
             // 
@@ -364,7 +369,7 @@
             this.Controls.Add(this.btnDeleteHD);
             this.Controls.Add(this.btnUpdateHD);
             this.Controls.Add(this.btnSaveHD);
-            this.Controls.Add(this.btnAddHD);
+            this.Controls.Add(this.btnNewHD);
             this.Controls.Add(this.groupB_CTHD);
             this.Controls.Add(this.groupB_HD);
             this.Name = "HoaDon_CTHD_Control";
@@ -405,8 +410,8 @@
         private System.Windows.Forms.TextBox txtDonGia;
         private System.Windows.Forms.ComboBox cbbHangHoa;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnCAddCTHD;
-        private System.Windows.Forms.Button btnAddHD;
+        private System.Windows.Forms.Button btnAddCTHD;
+        private System.Windows.Forms.Button btnNewHD;
         private System.Windows.Forms.Button btnSaveHD;
         private System.Windows.Forms.Button btnUpdateHD;
         private System.Windows.Forms.Button btnExit;

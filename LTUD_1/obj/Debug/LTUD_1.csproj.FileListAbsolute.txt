@@ -16,3 +16,4 @@ C:\C# project\LTUD_1\LTUD_1\obj\Debug\LTUD_1.Controls.CongTy_Control.resources
 C:\C# project\LTUD_1\LTUD_1\obj\Debug\LTUD_1.Controls.KhachHang_Control.resources
 C:\C# project\LTUD_1\LTUD_1\obj\Debug\LTUD_1.Controls.NhanVien_Control.resources
 C:\C# project\LTUD_1\LTUD_1\obj\Debug\LTUD_1.Controls.HoaDon_CTHD_Control.resources
+C:\C# project\LTUD_1\LTUD_1\obj\Debug\LTUD_1.FormManagement.resources
