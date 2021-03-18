@@ -15,7 +15,7 @@ namespace LTUD_1.Controls
     {
         FormManagement form2;
         int cthdRowIndex;
-        DataTable cthd_Garbage;
+        List<string> maSanPham_Garbage;
 
         public HoaDon_CTHD_Control()
         {
@@ -47,7 +47,6 @@ namespace LTUD_1.Controls
             string maHD = dataGV_HD.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtMaHD.Text = maHD;
             dataGV_CTHD.DataSource = cthd_DAL.SelectWhere(maHD);
-            cthd_Garbage = cthd_DAL.SelectWhere(" ");
         }
 
         private void dataGV_CTHD_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -148,8 +147,11 @@ namespace LTUD_1.Controls
 
         private void btnDeleteCTHD_Click(object sender, EventArgs e)
         {
-            DataRow row = ((DataTable)dataGV_CTHD.DataSource).Rows[0];
-            cthd_Garbage.Rows.Add(row[0]);
+            if (maSanPham_Garbage == null)
+                maSanPham_Garbage = new List<string>();
+
+            string maSanPham = ((DataTable)dataGV_CTHD.DataSource).Rows[cthdRowIndex][0].ToString();
+            maSanPham_Garbage.Add(maSanPham);
             dataGV_CTHD.Rows.RemoveAt(cthdRowIndex);
         }
 
@@ -183,12 +185,11 @@ namespace LTUD_1.Controls
             }
 
             //Deleting cthds in garbage
-            cthds = cthd_Garbage.Rows;
-            foreach (DataRow row in cthds)
+            foreach (string maSanPham in maSanPham_Garbage)
             {
-                cthd_DAL.Delete(txtMaHD.Text, row[0].ToString());
+                cthd_DAL.Delete(txtMaHD.Text, maSanPham);
             }
-            cthd_Garbage.Rows.Clear();
+            maSanPham_Garbage = null;
 
             dataGV_CTHD.DataSource = cthd_DAL.SelectWhere(txtMaHD.Text);
         }
