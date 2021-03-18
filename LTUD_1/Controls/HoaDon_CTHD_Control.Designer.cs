@@ -76,6 +76,7 @@
             // 
             // txtMaHD
             // 
+            this.txtMaHD.Enabled = false;
             this.txtMaHD.Location = new System.Drawing.Point(56, 19);
             this.txtMaHD.Name = "txtMaHD";
             this.txtMaHD.Size = new System.Drawing.Size(100, 20);
@@ -242,6 +243,7 @@
             this.btnDeleteCTHD.TabIndex = 15;
             this.btnDeleteCTHD.Text = "Xóa";
             this.btnDeleteCTHD.UseVisualStyleBackColor = true;
+            this.btnDeleteCTHD.Click += new System.EventHandler(this.btnDeleteCTHD_Click);
             // 
             // btnEditCTHD
             // 
@@ -251,6 +253,7 @@
             this.btnEditCTHD.TabIndex = 14;
             this.btnEditCTHD.Text = "Sửa";
             this.btnEditCTHD.UseVisualStyleBackColor = true;
+            this.btnEditCTHD.Click += new System.EventHandler(this.btnEditCTHD_Click);
             // 
             // dataGV_CTHD
             // 
@@ -323,6 +326,7 @@
             this.btnSaveHD.TabIndex = 21;
             this.btnSaveHD.Text = "Lưu";
             this.btnSaveHD.UseVisualStyleBackColor = true;
+            this.btnSaveHD.Click += new System.EventHandler(this.btnSaveHD_Click);
             // 
             // btnUpdateHD
             // 
@@ -332,6 +336,7 @@
             this.btnUpdateHD.TabIndex = 22;
             this.btnUpdateHD.Text = "Cập nhật";
             this.btnUpdateHD.UseVisualStyleBackColor = true;
+            this.btnUpdateHD.Click += new System.EventHandler(this.btnUpdateHD_Click);
             // 
             // btnExit
             // 
@@ -359,6 +364,7 @@
             this.btnDeleteHD.TabIndex = 23;
             this.btnDeleteHD.Text = "Xóa";
             this.btnDeleteHD.UseVisualStyleBackColor = true;
+            this.btnDeleteHD.Click += new System.EventHandler(this.btnDeleteHD_Click);
             // 
             // HoaDon_CTHD_Control
             // 

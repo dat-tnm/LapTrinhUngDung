@@ -14,7 +14,8 @@ namespace LTUD_1.Controls
     public partial class HoaDon_CTHD_Control : UserControl
     {
         FormManagement form2;
-        NhanVien_Control nhanVien_Control;
+        int cthdRowIndex;
+        DataTable cthd_Garbage;
 
         public HoaDon_CTHD_Control()
         {
@@ -26,12 +27,12 @@ namespace LTUD_1.Controls
             var sanPhamDV_DAL = new SanPhamDV_DAL();
 
             cbbTenNV.DataSource = nv_DAL.SelectAll();
-            cbbTenNV.DisplayMember = "MaNV";
-            cbbTenNV.ValueMember = "HoTen";
+            cbbTenNV.DisplayMember = "HoTen";
+            cbbTenNV.ValueMember = "MaNV";
 
             cbbTenKH.DataSource = kh_DAL.SelectAll();
-            cbbTenKH.DisplayMember = "MaKH";
-            cbbTenKH.ValueMember = "HoTen";
+            cbbTenKH.DisplayMember = "HoTen";
+            cbbTenKH.ValueMember = "MaKH";
 
             cbbHangHoa.DataSource = sanPhamDV_DAL.SelectAll();
             cbbHangHoa.DisplayMember = "Ten";
@@ -44,14 +45,20 @@ namespace LTUD_1.Controls
         {
             var cthd_DAL = new CTHD_DAL();
             string maHD = dataGV_HD.Rows[e.RowIndex].Cells[1].Value.ToString();
+            txtMaHD.Text = maHD;
             dataGV_CTHD.DataSource = cthd_DAL.SelectWhere(maHD);
+            cthd_Garbage = cthd_DAL.SelectWhere(" ");
         }
 
         private void dataGV_CTHD_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtDonViTinh.Text = dataGV_CTHD.Rows[e.RowIndex].Cells[2].Value.ToString();
-            txtDonGia.Text = dataGV_CTHD.Rows[e.RowIndex].Cells[3].Value.ToString();
-            txtSoLuong.Text = dataGV_CTHD.Rows[e.RowIndex].Cells[4].Value.ToString();
+            int rowIndex = e.RowIndex;
+            cthdRowIndex = e.RowIndex;
+
+            cbbHangHoa.Text = dataGV_CTHD[1, rowIndex].Value.ToString();
+            txtDonViTinh.Text = dataGV_CTHD.Rows[rowIndex].Cells[2].Value.ToString();
+            txtDonGia.Text = dataGV_CTHD.Rows[rowIndex].Cells[3].Value.ToString();
+            txtSoLuong.Text = dataGV_CTHD.Rows[rowIndex].Cells[4].Value.ToString();
         }
 
         private void btnAddNV_Click(object sender, EventArgs e)
@@ -113,6 +120,92 @@ namespace LTUD_1.Controls
             }
 
             source.Rows.Add(maHangHoa, tenHangHoa, txtDonViTinh.Text, txtDonGia.Text, txtSoLuong.Text, thanhTien.ToString());
+        }
+
+        private void btnEditCTHD_Click(object sender, EventArgs e)
+        {
+            double thanhTien;
+            try
+            {
+                thanhTien = double.Parse(txtDonGia.Text) * double.Parse(txtSoLuong.Text);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Đơn giá, số lượng phải là kiểu số!");
+                return;
+            }
+            string maHangHoa = ((DataRowView)cbbHangHoa.SelectedItem)[0].ToString();
+            string tenHangHoa = ((DataRowView)cbbHangHoa.SelectedItem)[1].ToString();
+
+            DataRow row = ((DataTable)dataGV_CTHD.DataSource).Rows[cthdRowIndex];
+            row[0] = maHangHoa;
+            row[1] = tenHangHoa;
+            row[2] = txtDonViTinh.Text;
+            row[3] = txtDonGia.Text;
+            row[4] = txtSoLuong.Text;
+            row[5] = thanhTien.ToString();
+        }
+
+        private void btnDeleteCTHD_Click(object sender, EventArgs e)
+        {
+            DataRow row = ((DataTable)dataGV_CTHD.DataSource).Rows[0];
+            cthd_Garbage.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5]);
+            dataGV_CTHD.Rows.RemoveAt(cthdRowIndex);
+        }
+
+        private void btnSaveHD_Click(object sender, EventArgs e)
+        {
+            var hd_DAL = new HoaDon_DAL();
+            string maKH = cbbTenKH.SelectedValue.ToString();
+            string maNV = cbbTenNV.SelectedValue.ToString();
+            hd_DAL.Insert(txtMaHD.Text, maKH, maNV, "CT01", "HD mua hang");
+
+            dataGV_HD.DataSource = hd_DAL.SelectAll();
+            txtMaHD.Enabled = false;
+        }
+
+        private void btnUpdateHD_Click(object sender, EventArgs e)
+        {
+            var hd_DAL = new HoaDon_DAL();
+            string maKH = cbbTenKH.SelectedValue.ToString();
+            string maNV = cbbTenNV.SelectedValue.ToString();
+            hd_DAL.Update(txtMaHD.Text, maKH, maNV, "CT01", "HD mua hang");
+
+            //Inserting or Updating cthds
+            var cthd_DAL = new CTHD_DAL();
+            DataRowCollection cthds = ((DataTable)dataGV_CTHD.DataSource).Rows;
+            foreach (DataRow row in cthds)
+            {
+                if (row.RowState != DataRowState.Deleted)
+                    cthd_DAL.Update(txtMaHD.Text, row[0].ToString(), row[4].ToString(), row[3].ToString());
+            }
+
+            //Deleting cthds in garbage
+            cthds = cthd_Garbage.Rows;
+            foreach (DataRow row in cthds)
+            {
+                cthd_DAL.Delete(txtMaHD.Text, row[0].ToString());
+            }
+            cthd_Garbage.Rows.Clear();
+
+            dataGV_CTHD.DataSource = cthd_DAL.SelectWhere(txtMaHD.Text);
+        }
+
+        private void btnDeleteHD_Click(object sender, EventArgs e)
+        {
+            var hd_DAL = new HoaDon_DAL();
+            var cthd_DAL = new CTHD_DAL();
+
+            hd_DAL.Delete(txtMaHD.Text);
+
+            DataRowCollection cthds = ((DataTable)dataGV_CTHD.DataSource).Rows;
+            foreach (DataRow row in cthds)
+            {
+                if (row.RowState != DataRowState.Deleted)
+                    cthd_DAL.Delete(txtMaHD.Text, row[0].ToString());
+            }
+
+            dataGV_HD.DataSource = hd_DAL.SelectAll();
         }
     }
 }

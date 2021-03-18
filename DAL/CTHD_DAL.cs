@@ -19,7 +19,7 @@ namespace DAL
 
         public DataTable SelectAll()
         {
-            return db.ExecQueryProcedure("CTHD_SelectAll");
+            return db.ExecQueryProcedure("ChiTietHoaDon_SelectAll");
         }
 
         public int Insert(string id, string maSPDV, string soLuong, string donGIa)
@@ -39,7 +39,7 @@ namespace DAL
             parameters[1] = new SqlParameter("@maSPDV", maSPDV);
             parameters[2] = new SqlParameter("@soLuong", soLuong);
             parameters[3] = new SqlParameter("@donGia", donGIa);
-            return db.ExecNonQueryProcedure("CTHD_Update", parameters);
+            return db.ExecNonQueryProcedure("ChiTietHoaDon_Update", parameters);
         }
 
         public int Delete(string id, string maSPDV)
@@ -48,7 +48,7 @@ namespace DAL
             parameters[0] = new SqlParameter("@soHD", id);
             parameters[1] = new SqlParameter("@maSPDV", maSPDV);
 
-            return db.ExecNonQueryProcedure("CTHD_Delete", parameters);
+            return db.ExecNonQueryProcedure("ChiTietHoaDon_Delete", parameters);
         }
 
         public DataTable SelectWhere(string idHoaDon)
