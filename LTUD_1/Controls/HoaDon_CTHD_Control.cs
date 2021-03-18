@@ -149,7 +149,7 @@ namespace LTUD_1.Controls
         private void btnDeleteCTHD_Click(object sender, EventArgs e)
         {
             DataRow row = ((DataTable)dataGV_CTHD.DataSource).Rows[0];
-            cthd_Garbage.Rows.Add(row[0], row[1], row[2], row[3], row[4], row[5]);
+            cthd_Garbage.Rows.Add(row[0]);
             dataGV_CTHD.Rows.RemoveAt(cthdRowIndex);
         }
 
@@ -176,8 +176,10 @@ namespace LTUD_1.Controls
             DataRowCollection cthds = ((DataTable)dataGV_CTHD.DataSource).Rows;
             foreach (DataRow row in cthds)
             {
-                if (row.RowState != DataRowState.Deleted)
+                if (row.RowState == DataRowState.Modified)
                     cthd_DAL.Update(txtMaHD.Text, row[0].ToString(), row[4].ToString(), row[3].ToString());
+                else if (row.RowState == DataRowState.Added)
+                    cthd_DAL.Insert(txtMaHD.Text, row[0].ToString(), row[4].ToString(), row[3].ToString());
             }
 
             //Deleting cthds in garbage
@@ -194,16 +196,16 @@ namespace LTUD_1.Controls
         private void btnDeleteHD_Click(object sender, EventArgs e)
         {
             var hd_DAL = new HoaDon_DAL();
-            var cthd_DAL = new CTHD_DAL();
-
             hd_DAL.Delete(txtMaHD.Text);
 
-            DataRowCollection cthds = ((DataTable)dataGV_CTHD.DataSource).Rows;
-            foreach (DataRow row in cthds)
-            {
-                if (row.RowState != DataRowState.Deleted)
-                    cthd_DAL.Delete(txtMaHD.Text, row[0].ToString());
-            }
+            //Nếu có Cascading từ khóa chính HoaDon tới ChiTietHoaDon thì chỉ cần xóa HoaDon là xong
+
+            //var cthd_DAL = new CTHD_DAL();
+            //DataRowCollection cthds = cthd_DAL.SelectWhere(txtMaHD.Text).Rows;
+            //foreach (DataRow row in cthds)
+            //{
+            //    cthd_DAL.Delete(txtMaHD.Text, row[0].ToString());
+            //}
 
             dataGV_HD.DataSource = hd_DAL.SelectAll();
         }

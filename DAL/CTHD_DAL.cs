@@ -29,7 +29,7 @@ namespace DAL
             parameters[1] = new SqlParameter("@maSPDV", maSPDV);
             parameters[2] = new SqlParameter("@soLuong", soLuong);
             parameters[3] = new SqlParameter("@donGia", donGIa);
-            return db.ExecNonQueryProcedure("CTHD_Insert", parameters);
+            return db.ExecNonQueryProcedure("ChiTietHoaDon_Insert", parameters);
         }
 
         public int Update(string id, string maSPDV, string soLuong, string donGIa)
