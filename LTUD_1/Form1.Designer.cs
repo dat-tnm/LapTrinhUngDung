@@ -64,28 +64,28 @@
             // mItemSanPhamDV
             // 
             this.mItemSanPhamDV.Name = "mItemSanPhamDV";
-            this.mItemSanPhamDV.Size = new System.Drawing.Size(180, 22);
+            this.mItemSanPhamDV.Size = new System.Drawing.Size(177, 22);
             this.mItemSanPhamDV.Text = "Sản phẩm - dịch vụ";
             this.mItemSanPhamDV.Click += new System.EventHandler(this.mItemSanPhamDV_Click);
             // 
             // nhânViênToolStripMenuItem
             // 
             this.nhânViênToolStripMenuItem.Name = "nhânViênToolStripMenuItem";
-            this.nhânViênToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nhânViênToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.nhânViênToolStripMenuItem.Text = "Nhân viên";
             this.nhânViênToolStripMenuItem.Click += new System.EventHandler(this.nhânViênToolStripMenuItem_Click);
             // 
             // côngTyToolStripMenuItem
             // 
             this.côngTyToolStripMenuItem.Name = "côngTyToolStripMenuItem";
-            this.côngTyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.côngTyToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.côngTyToolStripMenuItem.Text = "Công ty";
             this.côngTyToolStripMenuItem.Click += new System.EventHandler(this.côngTyToolStripMenuItem_Click);
             // 
             // kháchHàngToolStripMenuItem
             // 
             this.kháchHàngToolStripMenuItem.Name = "kháchHàngToolStripMenuItem";
-            this.kháchHàngToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.kháchHàngToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
             this.kháchHàngToolStripMenuItem.Text = "Khách hàng";
             this.kháchHàngToolStripMenuItem.Click += new System.EventHandler(this.kháchHàngToolStripMenuItem_Click);
             // 
@@ -100,19 +100,20 @@
             // 
             this.panel1.Location = new System.Drawing.Point(12, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(878, 436);
+            this.panel1.Size = new System.Drawing.Size(878, 488);
             this.panel1.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(902, 475);
+            this.ClientSize = new System.Drawing.Size(902, 527);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

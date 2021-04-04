@@ -16,6 +16,7 @@ namespace LTUD_1.Controls
         FormManagement form2;
         int cthdRowIndex;
         List<string> maSanPham_Garbage;
+        string MaHD;
 
         public HoaDon_CTHD_Control()
         {
@@ -41,12 +42,27 @@ namespace LTUD_1.Controls
             dataGV_HD.DataSource = hd_DAL.SelectAll();
         }
 
+        void TinhTongTien()
+        {
+            decimal sum = 0;
+            foreach (DataRow row in ((DataTable)dataGV_CTHD.DataSource).Rows)
+            {
+                sum += decimal.Parse(row[5].ToString());
+            }
+            numTongThanhTien.Value = sum;
+        }
+
+
+
+
         private void dataGV_HD_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             var cthd_DAL = new CTHD_DAL();
             string maHD = dataGV_HD.Rows[e.RowIndex].Cells[1].Value.ToString();
             txtMaHD.Text = maHD;
             dataGV_CTHD.DataSource = cthd_DAL.SelectWhere(maHD);
+
+            TinhTongTien();
         }
 
         private void dataGV_CTHD_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -94,7 +110,7 @@ namespace LTUD_1.Controls
                 return;
             }
 
-            double thanhTien;
+            double thanhTien;     
             try
             {
                 thanhTien = double.Parse(txtDonGia.Text) * double.Parse(txtSoLuong.Text);
@@ -104,11 +120,11 @@ namespace LTUD_1.Controls
                 MessageBox.Show("Đơn giá, số lượng phải là kiểu số!");
                 return;
             }
-            string maHangHoa = ((DataRowView)cbbHangHoa.SelectedItem)[0].ToString();
+            string maHangHoa = cbbHangHoa.SelectedValue.ToString();
             string tenHangHoa = ((DataRowView)cbbHangHoa.SelectedItem)[1].ToString();
 
-            DataTable source = (DataTable)dataGV_CTHD.DataSource;
-            foreach (DataRow row in source.Rows)
+            DataRowCollection cthd_rows = ((DataTable)dataGV_CTHD.DataSource).Rows;
+            foreach (DataRow row in cthd_rows)
             {
                 if (row[0].ToString() == maHangHoa)
                 {
@@ -118,7 +134,8 @@ namespace LTUD_1.Controls
                 }
             }
 
-            source.Rows.Add(maHangHoa, tenHangHoa, txtDonViTinh.Text, txtDonGia.Text, txtSoLuong.Text, thanhTien.ToString());
+            numTongThanhTien.Value += decimal.Parse(thanhTien.ToString());
+            cthd_rows.Add(maHangHoa, tenHangHoa, txtDonViTinh.Text, txtDonGia.Text, txtSoLuong.Text, thanhTien.ToString());
         }
 
         private void btnEditCTHD_Click(object sender, EventArgs e)
@@ -143,6 +160,8 @@ namespace LTUD_1.Controls
             row[3] = txtDonGia.Text;
             row[4] = txtSoLuong.Text;
             row[5] = thanhTien.ToString();
+
+            TinhTongTien();
         }
 
         private void btnDeleteCTHD_Click(object sender, EventArgs e)
@@ -150,7 +169,10 @@ namespace LTUD_1.Controls
             if (maSanPham_Garbage == null)
                 maSanPham_Garbage = new List<string>();
 
-            string maSanPham = ((DataTable)dataGV_CTHD.DataSource).Rows[cthdRowIndex][0].ToString();
+            var row = ((DataTable)dataGV_CTHD.DataSource).Rows[cthdRowIndex];
+
+            numTongThanhTien.Value -= decimal.Parse(row[5].ToString());
+            string maSanPham = row[0].ToString();
             maSanPham_Garbage.Add(maSanPham);
             dataGV_CTHD.Rows.RemoveAt(cthdRowIndex);
         }
@@ -185,11 +207,14 @@ namespace LTUD_1.Controls
             }
 
             //Deleting cthds in garbage
-            foreach (string maSanPham in maSanPham_Garbage)
+            if (maSanPham_Garbage != null)
             {
-                cthd_DAL.Delete(txtMaHD.Text, maSanPham);
+                foreach (string maSanPham in maSanPham_Garbage)
+                {
+                    cthd_DAL.Delete(txtMaHD.Text, maSanPham);
+                }
+                maSanPham_Garbage = null;
             }
-            maSanPham_Garbage = null;
 
             dataGV_CTHD.DataSource = cthd_DAL.SelectWhere(txtMaHD.Text);
         }
@@ -209,6 +234,12 @@ namespace LTUD_1.Controls
             //}
 
             dataGV_HD.DataSource = hd_DAL.SelectAll();
+        }
+
+        private void btnPrintHD_Click(object sender, EventArgs e)
+        {
+            Form_InHoaDon form_InHoaDon = new Form_InHoaDon(txtMaHD.Text);
+            form_InHoaDon.Show();
         }
     }
 }

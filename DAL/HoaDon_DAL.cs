@@ -22,6 +22,13 @@ namespace DAL
             return db.ExecQueryProcedure("HoaDon_SelectAll");
         }
 
+        public DataTable SelectWhereId(string soHD)
+        {
+            parameters = new SqlParameter[1];
+            parameters[0] = new SqlParameter("@soHD", soHD);
+            return db.ExecQueryProcedure("HoaDon_SelectWhereId", parameters);
+        }
+
         //    CREATE PROCEDURE HoaDon_SelectAll
         //    AS
 

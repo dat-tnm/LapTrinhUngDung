@@ -21,7 +21,12 @@ namespace LTUD_1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             sanPhamDV_Control = new SanPhamDV_Control();
+            thanhToánToolStripMenuItem_Click(sender, e);
         }
 
         private void mItemSanPhamDV_Click(object sender, EventArgs e)

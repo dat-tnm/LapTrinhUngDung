@@ -59,10 +59,13 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnPrintHD = new System.Windows.Forms.Button();
             this.btnDeleteHD = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numTongThanhTien = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dataGV_HD)).BeginInit();
             this.groupB_HD.SuspendLayout();
             this.groupB_CTHD.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGV_CTHD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTongThanhTien)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -310,7 +313,7 @@
             // 
             // btnNewHD
             // 
-            this.btnNewHD.Location = new System.Drawing.Point(15, 409);
+            this.btnNewHD.Location = new System.Drawing.Point(14, 432);
             this.btnNewHD.Name = "btnNewHD";
             this.btnNewHD.Size = new System.Drawing.Size(62, 23);
             this.btnNewHD.TabIndex = 20;
@@ -320,7 +323,7 @@
             // 
             // btnSaveHD
             // 
-            this.btnSaveHD.Location = new System.Drawing.Point(172, 409);
+            this.btnSaveHD.Location = new System.Drawing.Point(171, 432);
             this.btnSaveHD.Name = "btnSaveHD";
             this.btnSaveHD.Size = new System.Drawing.Size(62, 23);
             this.btnSaveHD.TabIndex = 21;
@@ -330,7 +333,7 @@
             // 
             // btnUpdateHD
             // 
-            this.btnUpdateHD.Location = new System.Drawing.Point(326, 409);
+            this.btnUpdateHD.Location = new System.Drawing.Point(325, 432);
             this.btnUpdateHD.Name = "btnUpdateHD";
             this.btnUpdateHD.Size = new System.Drawing.Size(62, 23);
             this.btnUpdateHD.TabIndex = 22;
@@ -340,7 +343,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(734, 409);
+            this.btnExit.Location = new System.Drawing.Point(733, 432);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(62, 23);
             this.btnExit.TabIndex = 25;
@@ -349,16 +352,17 @@
             // 
             // btnPrintHD
             // 
-            this.btnPrintHD.Location = new System.Drawing.Point(580, 409);
+            this.btnPrintHD.Location = new System.Drawing.Point(579, 432);
             this.btnPrintHD.Name = "btnPrintHD";
             this.btnPrintHD.Size = new System.Drawing.Size(62, 23);
             this.btnPrintHD.TabIndex = 24;
             this.btnPrintHD.Text = "In";
             this.btnPrintHD.UseVisualStyleBackColor = true;
+            this.btnPrintHD.Click += new System.EventHandler(this.btnPrintHD_Click);
             // 
             // btnDeleteHD
             // 
-            this.btnDeleteHD.Location = new System.Drawing.Point(423, 409);
+            this.btnDeleteHD.Location = new System.Drawing.Point(422, 432);
             this.btnDeleteHD.Name = "btnDeleteHD";
             this.btnDeleteHD.Size = new System.Drawing.Size(62, 23);
             this.btnDeleteHD.TabIndex = 23;
@@ -366,10 +370,40 @@
             this.btnDeleteHD.UseVisualStyleBackColor = true;
             this.btnDeleteHD.Click += new System.EventHandler(this.btnDeleteHD_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(638, 406);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(35, 13);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "Tổng:";
+            // 
+            // numTongThanhTien
+            // 
+            this.numTongThanhTien.Increment = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numTongThanhTien.Location = new System.Drawing.Point(679, 404);
+            this.numTongThanhTien.Maximum = new decimal(new int[] {
+            -727379968,
+            232,
+            0,
+            0});
+            this.numTongThanhTien.Name = "numTongThanhTien";
+            this.numTongThanhTien.ReadOnly = true;
+            this.numTongThanhTien.Size = new System.Drawing.Size(116, 20);
+            this.numTongThanhTien.TabIndex = 27;
+            this.numTongThanhTien.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // HoaDon_CTHD_Control
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.numTongThanhTien);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPrintHD);
             this.Controls.Add(this.btnDeleteHD);
@@ -379,14 +413,16 @@
             this.Controls.Add(this.groupB_CTHD);
             this.Controls.Add(this.groupB_HD);
             this.Name = "HoaDon_CTHD_Control";
-            this.Size = new System.Drawing.Size(818, 470);
+            this.Size = new System.Drawing.Size(818, 464);
             ((System.ComponentModel.ISupportInitialize)(this.dataGV_HD)).EndInit();
             this.groupB_HD.ResumeLayout(false);
             this.groupB_HD.PerformLayout();
             this.groupB_CTHD.ResumeLayout(false);
             this.groupB_CTHD.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGV_CTHD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTongThanhTien)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -423,5 +459,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnPrintHD;
         private System.Windows.Forms.Button btnDeleteHD;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.NumericUpDown numTongThanhTien;
     }
 }
